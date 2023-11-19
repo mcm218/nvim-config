@@ -276,7 +276,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
 -- [[ Highlight on yank ]]
@@ -421,10 +421,10 @@ vim.defer_fn(function()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>a'] = '@parameter.inner',
+          ['<leader>C-a'] = '@parameter.inner',
         },
         swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
+          ['<leader>C-A'] = '@parameter.inner',
         },
       },
     },
@@ -481,7 +481,7 @@ require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+  --  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
@@ -588,6 +588,29 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+-- Set Neotree keybinds
+vim.api.nvim_set_keymap('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
+
+-- Mark the current file
+vim.api.nvim_set_keymap('n', '<leader>a', ":lua require('harpoon.mark').add_file()<CR>",
+  { noremap = true, silent = true })
+
+-- Open Harpoon's menu to see all marked files
+vim.api.nvim_set_keymap('n', '<leader>e', ":lua require('harpoon.ui').toggle_quick_menu()<CR>",
+  { noremap = true, silent = true })
+
+-- Jump to the first marked file
+vim.api.nvim_set_keymap('n', '<leader>h', ":lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true, silent = true })
+
+-- Jump to the second marked file
+vim.api.nvim_set_keymap('n', '<leader>j', ":lua require('harpoon.ui').nav_file(2)<CR>", { noremap = true, silent = true })
+
+-- Jump to the third marked file
+vim.api.nvim_set_keymap('n', '<leader>k', ":lua require('harpoon.ui').nav_file(3)<CR>", { noremap = true, silent = true })
+
+-- Jump to the fourth marked file
+vim.api.nvim_set_keymap('n', '<leader>l', ":lua require('harpoon.ui').nav_file(4)<CR>", { noremap = true, silent = true })
+
 
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
