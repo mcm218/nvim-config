@@ -59,6 +59,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- ensure cursor is always centered :set so=999
+vim.opt.scrolloff = 999
+
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -229,7 +232,7 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -480,7 +483,7 @@ end
 require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  --  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   --  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
@@ -611,6 +614,8 @@ vim.api.nvim_set_keymap('n', '<leader>k', ":lua require('harpoon.ui').nav_file(3
 -- Jump to the fourth marked file
 vim.api.nvim_set_keymap('n', '<leader>l', ":lua require('harpoon.ui').nav_file(4)<CR>", { noremap = true, silent = true })
 
+-- leader g to open :LazyGit
+vim.api.nvim_set_keymap('n', '<leader>g', ':LazyGit<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
