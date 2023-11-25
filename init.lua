@@ -619,5 +619,29 @@ vim.api.nvim_set_keymap('n', '<leader>g', ':LazyGit<CR>', { noremap = true, sile
 
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+
+require('Comment').setup({
+  ignore = '^$',
+  toggler = {
+    -- line -> leader + /
+    -- block -> leader + ?
+    line = '<leader>c/',
+    block = '<leader>c?',
+  },
+  opleader = {
+    line = '<leader>c',
+    block = '<leader>b',
+  },
+})
+
+-- Highlight current line
+vim.cmd('set cursorline');
+vim.cmd('set cursorcolumn');
+-- vim.cmd('highlight CursorLine ctermbg=White');
+-- vim.cmd('highlight CursorColumn ctermbg=White');
+vim.cmd('highlight Cursor ctermfg=White ctermbg=Black cterm=bold guifg=white guibg=Black gui=bold')
+vim.cmd('highlight CursorLine ctermfg=White ctermbg=Black cterm=bold guifg=white guibg=Black gui=bold')
+vim.cmd('highlight CursorColumn ctermfg=White ctermbg=Black cterm=bold guifg=white guibg=Black gui=bold')
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
